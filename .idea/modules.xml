@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidContact.iml" filepath="$PROJECT_DIR$/AndroidContact.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/csmalldata/csmalldata.iml" filepath="$PROJECT_DIR$/csmalldata/csmalldata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javalibcommon/javalibcommon.iml" filepath="$PROJECT_DIR$/javalibcommon/javalibcommon.iml" />
     </modules>
   </component>
 </project>

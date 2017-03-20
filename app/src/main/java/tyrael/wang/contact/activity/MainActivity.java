@@ -1,4 +1,4 @@
-package tyrael.wang.contact;
+package tyrael.wang.contact.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,9 +19,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import tyrael.wang.contact.R;
+import tyrael.wang.contact.presenter.MainPresenter;
+
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-    Context context = MainActivity.this;
+
+    MainPresenter mp = new MainPresenter(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,26 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertContact(){
-        ContentValues values = new ContentValues();
-        //首先向RawContacts.CONTENT_URI执行一个空值插入，目的是获取系统返回的rawContactId
-        Uri rawContactUri = context.getContentResolver().insert(ContactsContract.RawContacts.CONTENT_URI, values);
-        long rawContactId = ContentUris.parseId(rawContactUri);
-
-        //往data表入姓名数据
-        values.clear();
-        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
-        values.put(ContactsContract.Contacts.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
-        values.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, "zhangsan");
-        context.getContentResolver().insert(
-                android.provider.ContactsContract.Data.CONTENT_URI, values);
-
-        //往data表入电话数据
-        values.clear();
-        values.put(android.provider.ContactsContract.Contacts.Data.RAW_CONTACT_ID, rawContactId);
-        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-        values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "5554");
-        values.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
-        context.getContentResolver().insert(
-                android.provider.ContactsContract.Data.CONTENT_URI, values);
+        mp.insertContacts();
     }
 }
